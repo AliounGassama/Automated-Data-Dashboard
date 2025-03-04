@@ -24,6 +24,7 @@ def fetch_stock_data(tickers, period, interval):
             stock_data.to_csv(save_path, index=False)
 
             print(f"Data saved at {save_path}")
+
         except Exception as e:
             print(f"Error fetching data for {ticker}: {e}")
 
@@ -33,6 +34,7 @@ def tickers_validation():
         tickers = input("Enter stock tickers (comma-separated, e.g., AAPL, TSLA, MSFT): ").upper().split(",")
         tickers = [ticker.strip() for ticker in tickers if ticker.strip()]
 
+        # Only list and run vaild tickers
         valid_tickers = []
         for ticker in tickers:
             try:
@@ -41,11 +43,13 @@ def tickers_validation():
                     print(f"Warning: {ticker} might be invalid!")
                 else:
                     valid_tickers.append(ticker)
+
             except:
                 print(f"Invalid ticker: {ticker}")
         
         if valid_tickers:
             return valid_tickers
+        
         else:
             print("No valid tickers provided. Please try again.")
 
@@ -57,6 +61,7 @@ def period_validation():
 
         if period in valid_periods:
             return period
+        
         else:
             print(f"Invalid period! Choose from: {', '.join(valid_periods)}")
 
@@ -83,6 +88,7 @@ def interval_validation(period):
         
         if interval in valid_intervals:
             return interval
+        
         else:
             print(f"Invalid interval! Choose from: {', '.join(valid_intervals)}")
 
